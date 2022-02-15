@@ -35,7 +35,16 @@ pipeline{
 		    sh "ls -R"
 			
                 }
-            }   
+            } 
+	     stage("Deploy")
+            {
+                steps{
+                    sshagent(['ubuntu']){
+                    sh "scp -o StrictHostKeyChecking=no   /home/ubuntu/.jenkins/workspace/JenkinsAssignment_production/target/*.jar ubuntu@172.31.81.147:/home/ubuntu/"
+                               
+                 }
+                }
+            } 
     }
     post {
         always{
