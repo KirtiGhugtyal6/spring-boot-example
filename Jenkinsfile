@@ -28,6 +28,7 @@ pipeline{
             {
                 steps{
                     sh "mvn package"
+		    sh "ls -R"
                 }
             }   
     }
