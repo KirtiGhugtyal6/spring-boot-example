@@ -30,7 +30,10 @@ pipeline{
             {
                 steps{
                     sh "mvn package"
+		    sh "pwd"
+		    sh "ls -la"
 		    sh "ls -R"
+			
                 }
             }   
     }
