@@ -1,0 +1,33 @@
+pipeline { 
+    agent {
+        label 'slave1'
+    }
+    
+    tools { 
+        maven 'Maven'  
+    }
+    stages {
+        stage('Build') {
+            steps {
+                sh 'mvn -B -DskipTests clean package'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'mvn test
+            }
+        }
+        stage('Deliver') {
+            when {
+                expression {
+                    BRANCH_NAME == 'production'
+                }
+            }
+            steps {
+                sh 'chmod +x ./jenkins/scripts/deliver.sh'
+                sh 'mvn package'
+                sh './jenkins/scripts/deliver.sh'
+            }
+        }
+    }
+}
