@@ -14,19 +14,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'mvn test'
-            }
-            post {
-           
-                failure
-                {
-                    mail( body: 'Test Stage FAILED', subject: 'Production branch Build Report Test stage', to: 'vaibhav.kumar@knoldus.com' )
-                }
-                success
-                {
-                    mail( body: 'Test Stage succeeded', subject: 'Production branch Build Report Test stage', to: 'vaibhav.kumar@knoldus.com' )
-                }
-                
+                sh 'mvn test
             }
         }
         stage('Deliver') {
